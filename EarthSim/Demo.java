@@ -1,10 +1,9 @@
 // Demo.java
 package EarthSim;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
 
-public class Demo extends JFrame {
+public class Demo{
 	public static void main(String[] args) {
 		Demo demo = new Demo();
 		demo.processArgs(args);
@@ -84,32 +83,22 @@ public class Demo extends JFrame {
 		debug("Demo running...");
 	}
 
+	private void createAndShowUI(){
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				GUI ui = new GUI();
+				ui.setVisible(true);
+			}
+		});		
+	}
+
 	private void printSettings(){
 		debug("Simulation on own thread\t:" + ownSimThread);
 		debug("Presentation on own thread\t:" + ownPresThread);
 		debug("Initiative\t\t\t:" + initiative);
 		debug("Buffer Size\t\t\t:" + bufferSize);
 		debug("");
-	}
-
-	private void createAndShowUI(){
-		setupWindow();
-		add(contentsPanel());
-		pack();
-		setVisible(true);
-	}
-
-	private void setupWindow(){
-		// setup overall app ui
-		setTitle("Heated Plate Diffusion Simulation");
-		setSize(300, 200);
-		// setExtendedState(JFrame.MAXIMIZED_BOTH);
-		setLocationRelativeTo(null);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-	}
-
-	private JPanel contentsPanel(){
-		return new JPanel();
 	}
 
 	private void debug(String s){
