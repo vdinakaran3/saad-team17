@@ -127,26 +127,28 @@ public class GUI extends JFrame implements ActionListener{
 		return inputPanel;
 	}
 
+	private HashMap<String, JTextField> outputs = new HashMap<String, JTextField>();
+
 	private JPanel displayField(String name){
-		JPanel inputPanel = new JPanel();
-		// inputPanel.setBorder(BorderFactory.createTitledBorder("blah"));
-		// inputPanel.setLayout(new BoxLayout(inputPanel,BoxLayout.LINE_AXIS));
-		inputPanel.setLayout(new FlowLayout());
-		inputPanel.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		JPanel outputPanel = new JPanel();
+		// outputPanel.setBorder(BorderFactory.createTitledBorder("blah"));
+		// outputPanel.setLayout(new BoxLayout(outputPanel,BoxLayout.LINE_AXIS));
+		outputPanel.setLayout(new FlowLayout());
+		outputPanel.setAlignmentX(Component.RIGHT_ALIGNMENT);
 
 		JLabel l = new JLabel(name);
 		l.setAlignmentX(Component.LEFT_ALIGNMENT);
-		inputPanel.add(l);
+		outputPanel.add(l);
 
-		// inputPanel.add(Box.createHorizontalGlue());
+		// outputPanel.add(Box.createHorizontalGlue());
 		JTextField t = new JTextField("", 10);
 		t.setAlignmentX(Component.RIGHT_ALIGNMENT);
 		t.setEditable(false);
 		l.setLabelFor(t);
-		inputPanel.add(t);
+		outputPanel.add(t);
 
-		inputs.put(name, t);
-		return inputPanel;
+		outputs.put(name, t);
+		return outputPanel;
 	}
 
 	private JButton button(String name) {
