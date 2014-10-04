@@ -43,19 +43,29 @@ public class GUI extends JFrame implements ActionListener{
 		contents.setBorder(new EmptyBorder(new Insets(20, 20, 20, 20)));
 		contents.setAlignmentY(Component.TOP_ALIGNMENT);
 
-		contents.add(settings(), BorderLayout.WEST);
+		contents.add(settingsNControls(), BorderLayout.WEST);
 		contents.add(presentation(),BorderLayout.CENTER);
-		contents.add(runControls(),BorderLayout.SOUTH);
+		contents.add(feedback());
 
 		this.contents = contents;
 		return contents;
 	}
 
+	private JPanel settingsNControls(){
+		JPanel sncPanel = new JPanel();
+		sncPanel.setLayout(new BoxLayout(sncPanel,BoxLayout.PAGE_AXIS));
+		sncPanel.setAlignmentY(Component.TOP_ALIGNMENT);
+
+		sncPanel.add(settings(), BorderLayout.WEST);
+		sncPanel.add(runControls(),BorderLayout.WEST);
+
+		return sncPanel;
+	}
+
 	private JPanel settings() {
 		JPanel settingsPanel = new JPanel();
 		settingsPanel.setBorder(BorderFactory.createTitledBorder("Settings"));
-		settingsPanel.setLayout(new BoxLayout(settingsPanel,
-				BoxLayout.PAGE_AXIS));
+		settingsPanel.setLayout(new BoxLayout(settingsPanel,BoxLayout.PAGE_AXIS));
 		settingsPanel.setAlignmentY(Component.TOP_ALIGNMENT);
 		// settingsPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
@@ -66,8 +76,6 @@ public class GUI extends JFrame implements ActionListener{
 		return settingsPanel;
 	}
 
-	private JPanel presentation(){ return new JPanel();}
-
 	private JPanel runControls() {
 		JPanel ctrlsPanel = new JPanel(new FlowLayout());
 		ctrlsPanel.setAlignmentX(Component.RIGHT_ALIGNMENT);
@@ -77,6 +85,19 @@ public class GUI extends JFrame implements ActionListener{
 		ctrlsPanel.add(button("Stop"));
 
 		return ctrlsPanel;
+	}
+
+	private JPanel presentation(){ return new JPanel();}
+
+	private JPanel feedback(){
+		JPanel fbPanel = new JPanel();
+		fbPanel.setLayout(new BoxLayout(fbPanel,BoxLayout.PAGE_AXIS));
+		fbPanel.add(displayField("Rotational Position"));
+		fbPanel.add(displayField("Time"));
+		fbPanel.add(displayField("Grid Spacing"));
+		fbPanel.add(displayField("Simulation Time Step"));
+
+		return fbPanel;
 	}
 	private HashMap<String, JTextField> inputs = new HashMap<String, JTextField>();
 
@@ -101,6 +122,10 @@ public class GUI extends JFrame implements ActionListener{
 		return inputPanel;
 	}
 
+	private JPanel displayField(String name){
+		JPanel p = inputField(name);
+	}
+
 	private JButton button(String name) {
 		JButton button = new JButton(name);
 		button.setActionCommand(name);
@@ -109,7 +134,7 @@ public class GUI extends JFrame implements ActionListener{
 	}
 
 	public void actionPerformed(ActionEvent e) {
-		
+
 	}
 	
 	// todo: add handler for window close
