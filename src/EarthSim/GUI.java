@@ -15,6 +15,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Color;
 
 import java.util.HashMap;
 
@@ -45,7 +46,7 @@ public class GUI extends JFrame implements ActionListener{
 
 		contents.add(settingsNControls(), BorderLayout.WEST);
 		contents.add(presentation(),BorderLayout.CENTER);
-		contents.add(feedback());
+		contents.add(feedback(),BorderLayout.SOUTH);
 
 		this.contents = contents;
 		return contents;
@@ -87,7 +88,11 @@ public class GUI extends JFrame implements ActionListener{
 		return ctrlsPanel;
 	}
 
-	private JPanel presentation(){ return new JPanel();}
+	private JPanel presentation(){ 
+		JPanel pres = new JPanel();
+		pres.setBorder(BorderFactory.createLineBorder(Color.black));
+		return pres;
+	}
 
 	private JPanel feedback(){
 		JPanel fbPanel = new JPanel();
@@ -123,7 +128,25 @@ public class GUI extends JFrame implements ActionListener{
 	}
 
 	private JPanel displayField(String name){
-		JPanel p = inputField(name);
+		JPanel inputPanel = new JPanel();
+		// inputPanel.setBorder(BorderFactory.createTitledBorder("blah"));
+		// inputPanel.setLayout(new BoxLayout(inputPanel,BoxLayout.LINE_AXIS));
+		inputPanel.setLayout(new FlowLayout());
+		inputPanel.setAlignmentX(Component.RIGHT_ALIGNMENT);
+
+		JLabel l = new JLabel(name);
+		l.setAlignmentX(Component.LEFT_ALIGNMENT);
+		inputPanel.add(l);
+
+		// inputPanel.add(Box.createHorizontalGlue());
+		JTextField t = new JTextField("", 10);
+		t.setAlignmentX(Component.RIGHT_ALIGNMENT);
+		t.setEditable(false);
+		l.setLabelFor(t);
+		inputPanel.add(t);
+
+		inputs.put(name, t);
+		return inputPanel;
 	}
 
 	private JButton button(String name) {

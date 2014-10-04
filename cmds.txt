@@ -1,0 +1,15 @@
+javac EarthSim/*.java
+
+java -cp . EarthSim.Demo
+java -cp . EarthSim.Demo -s
+java -cp . EarthSim.Demo -p
+java -cp . EarthSim.Demo -s -p -r
+java -cp . EarthSim.Demo -s -p -t
+java -cp . EarthSim.Demo -s -p -t -r
+java -cp . EarthSim.Demo -s -p -r -b
+java -cp . EarthSim.Demo -s -p -r -b ab
+java -cp . EarthSim.Demo -s -p -r -b 1
+java -cp . EarthSim.Demo -s -p -r -b 12345
+java -cp . EarthSim.Demo -s -p -r -b 12345e
+java -cp . EarthSim.Demo -s -p -r x
+java -cp . EarthSim.Demo abc
